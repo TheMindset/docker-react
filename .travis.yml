@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true themindset/docker-react yarn test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "react-app"
+  env: "ReactApp-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-708200263601"
+  bucket_path: "react-app"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
